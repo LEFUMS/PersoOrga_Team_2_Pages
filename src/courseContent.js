@@ -1,7 +1,11 @@
-// ─────────────────────────────────────────────────────────────────────────
-// KURSINHALTE PE/OE — Grundlage für Personas & Feedback
-// Quelle: Session 2 (Kommunikation/Kooperation) & Session 6 (Überzeugung)
-// ─────────────────────────────────────────────────────────────────────────
+// ╔═══════════════════════════════════════════════════════════════════════╗
+// ║  📊  KURSINHALTE FÜR DIE AUSWERTUNG  —  HIER DIE BEWERTUNGSBASIS ÄNDERN ║
+// ║                                                                         ║
+// ║  Dieser Text (COURSE_CONTEXT) wird bei jeder "Gespräch auswerten"-      ║
+// ║  Bewertung an die KI mitgeschickt. Er enthält die 10 Überzeugungs-      ║
+// ║  techniken, die 7 Tipps und den Fall-Kontext. Passen Sie ihn an, wenn   ║
+// ║  sich Kursinhalte ändern. Text steht zwischen den Backticks ` ... `.    ║
+// ╚═══════════════════════════════════════════════════════════════════════╝
 
 export const COURSE_CONTEXT = `
 KURSINHALTE PE/OE (Session 2 & 6) — verbindliche Bewertungsgrundlage:

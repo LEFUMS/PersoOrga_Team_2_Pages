@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { SCENARIOS, DIFFICULTY_COLORS, DEFAULT_GLOBAL_INSTRUCTIONS } from "./personas.js";
 import { COURSE_CONTEXT, TECHNIQUES } from "./courseContent.js";
 import { PROVIDERS, loadConfig, saveConfig, clearConfig, callLLM, getFixedConfig } from "./providers.js";
+import { ADMIN_PIN, APP_TEXTE, STANDARD_ANBIETER, STANDARD_MODELL } from "./EINSTELLUNGEN.js";
 
 // Alias — alle Aufrufe gehen über den konfigurierten Anbieter
 const callClaude = callLLM;
@@ -332,7 +333,7 @@ function ChatView({ scenario, globalInstructions, onBack }) {
 // ─────────────────────────────────────────────────────────────────────────
 // ADMIN PANEL
 // ─────────────────────────────────────────────────────────────────────────
-const ADMIN_PIN = "1234";
+// (ADMIN_PIN wird zentral aus EINSTELLUNGEN.js importiert)
 
 const iStyle = {
   width: "100%", padding: "10px 14px", background: "#0A0A14",
@@ -556,9 +557,10 @@ function ScenarioCard({ scenario, onClick }) {
 // SETUP SCREEN — Anbieter & API-Key wählen (beim ersten Start)
 // ─────────────────────────────────────────────────────────────────────────
 function SetupScreen({ initial, onSave, onCancel }) {
-  const [provider, setProvider] = useState(initial?.provider || "anthropic");
+  const startProvider = initial?.provider || STANDARD_ANBIETER;
+  const [provider, setProvider] = useState(startProvider);
   const [apiKey, setApiKey] = useState(initial?.apiKey || "");
-  const [model, setModel] = useState(initial?.model || PROVIDERS[initial?.provider || "anthropic"].defaultModel);
+  const [model, setModel] = useState(initial?.model || STANDARD_MODELL || PROVIDERS[startProvider].defaultModel);
 
   function pickProvider(p) {
     setProvider(p);
@@ -659,14 +661,13 @@ export default function App() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 48, flexWrap: "wrap", gap: 24 }}>
           <div>
             <div style={{ display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: 2, color: "#FF6B35", background: "#FF6B3518", border: "1px solid #FF6B3533", borderRadius: 20, padding: "6px 14px", marginBottom: 20 }}>
-              PE/OE · CASE STUDY · KRONBERG SITZSYSTEME
+              {APP_TEXTE.banner}
             </div>
             <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(32px,5vw,52px)", fontWeight: 400, lineHeight: 1.15, margin: 0, letterSpacing: "-1px" }}>
-              Überzeugungs-<span style={{ background: "linear-gradient(90deg,#FF6B35,#7B2FBE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Simulator</span>
+              {APP_TEXTE.titel}<span style={{ background: "linear-gradient(90deg,#FF6B35,#7B2FBE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{APP_TEXTE.titelFarbig}</span>
             </h1>
             <p style={{ color: "#777", marginTop: 16, fontSize: 17, lineHeight: 1.6, maxWidth: 560 }}>
-              Überzeuge drei Schlüsselpersonen von Kronberg Sitzsysteme, bei „Projekt Fokus26" mitzuwirken.
-              Setze die 10 Überzeugungstechniken aus Session 6 gezielt ein.
+              {APP_TEXTE.beschreibung}
             </p>
           </div>
 
@@ -686,7 +687,7 @@ export default function App() {
                 ⚙️ Admin Panel
               </button>
             )}
-            <div style={{ fontSize: 11, color: "#444" }}>{adminUnlocked ? "Admin-Zugang aktiv" : "PIN: 1234 (änderbar im Code)"}</div>
+            <div style={{ fontSize: 11, color: "#444" }}>{adminUnlocked ? "Admin-Zugang aktiv" : `PIN: ${ADMIN_PIN} (änderbar in EINSTELLUNGEN.js)`}</div>
             {!hasFixedKey && (
               <button onClick={() => setShowSetup(true)} style={{ marginTop: 4, background: "none", border: "none", color: "#555", cursor: "pointer", fontSize: 12, textDecoration: "underline" }}>
                 KI-Anbieter wechseln ({PROVIDERS[config.provider].label})
@@ -703,12 +704,12 @@ export default function App() {
         <div style={{ marginTop: 40, padding: 22, background: "#0D0D1A", border: "1px solid #1E1E2E", borderRadius: 14 }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: "#555", marginBottom: 10, textTransform: "uppercase" }}>So funktioniert's</div>
           <div style={{ color: "#888", fontSize: 14, lineHeight: 1.8 }}>
-            1. Wähle eine Kronberg-Person &nbsp;·&nbsp; 2. Führe das Überzeugungsgespräch (Fokus26) &nbsp;·&nbsp; 3. Klicke „Gespräch auswerten" für dein Feedback zu Überzeugungstechniken & Kommunikation
+            {APP_TEXTE.anleitung}
           </div>
         </div>
 
         <div style={{ textAlign: "center", marginTop: 36, color: "#2A2A3E", fontSize: 13 }}>
-          Hochschule München · PE/OE · Powered by Claude
+          {APP_TEXTE.fusszeile}
         </div>
       </div>
     </div>

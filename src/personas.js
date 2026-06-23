@@ -1,7 +1,31 @@
-// ─────────────────────────────────────────────────────────────────────────
-// 3 KRONBERG-PERSONAS für Aufgabe 2 (Überzeugung zur Mitwirkung an Fokus26)
-// Jede Persona hat: systemPrompt (Rollenspiel) + evaluatorKey (Bewertungsschlüssel)
-// ─────────────────────────────────────────────────────────────────────────
+// ╔═══════════════════════════════════════════════════════════════════════╗
+// ║  👤  DIE 3 PERSONEN / CHARAKTERE  —  HIER DIE PERSONAS ÄNDERN           ║
+// ║                                                                         ║
+// ║  Jede der 3 Personen ist ein Block { ... } in der Liste SCENARIOS.      ║
+// ║  Ändern Sie NUR den Text zwischen den Anführungszeichen. Bedeutung:     ║
+// ║                                                                         ║
+// ║   name         = angezeigter Name (z.B. "Dr. Indra Gaurav")            ║
+// ║   role         = Position/Titel unter dem Namen                         ║
+// ║   description  = kurzer Text auf der Auswahl-Karte                      ║
+// ║   difficulty   = "Leicht" | "Mittel" | "Schwer"                         ║
+// ║   color        = Farbe der Person, Format "#RRGGBB"                      ║
+// ║   goal         = die Aufgabe, die der/dem Studierenden angezeigt wird    ║
+// ║                                                                         ║
+// ║   systemPrompt = ⭐ DER CHARAKTER. Dieser Text steuert, WIE die KI als   ║
+// ║                 diese Person spricht und reagiert. Hier festlegen:      ║
+// ║                 Hintergrund, Ängste/Ziele, und wie die Person auf die   ║
+// ║                 Überzeugungstechniken reagiert. Text steht zwischen     ║
+// ║                 den schrägen Anführungszeichen ` ... ` (Backticks).     ║
+// ║                                                                         ║
+// ║   evaluatorKey = ⭐ DIE BEWERTUNG. Dieser Text sagt der Auswertungs-KI,  ║
+// ║                 welche Techniken zu dieser Person passen und was        ║
+// ║                 "Erfolg" bedeutet. Studierende sehen ihn NICHT.         ║
+// ║                                                                         ║
+// ║  Eine Person hinzufügen: einen kompletten Block { ... } kopieren,       ║
+// ║  hinter das letzte einfügen (mit Komma trennen) und id eindeutig machen.║
+// ╚═══════════════════════════════════════════════════════════════════════╝
+
+import { SCHWIERIGKEITS_FARBEN } from "./EINSTELLUNGEN.js";
 
 export const SCENARIOS = [
   // ===================================================================
@@ -137,17 +161,18 @@ ERFOLG = praktischer Nutzen + Würdigung ihrer Expertise/Freiraum + glaubhafte Z
   }
 ];
 
-export const DIFFICULTY_COLORS = {
-  Leicht: "#00A878",
-  Mittel: "#FF6B35",
-  Schwer: "#E63946"
-};
+// Schwierigkeits-Farben werden zentral in EINSTELLUNGEN.js festgelegt
+export const DIFFICULTY_COLORS = SCHWIERIGKEITS_FARBEN;
 
-// ─────────────────────────────────────────────────────────────────────────
-// GLOBALE ZUSATZ-ANWEISUNGEN
-// Werden bei JEDER Persona zusätzlich zum systemPrompt mitgeschickt.
-// Zentral im Admin Panel bearbeitbar. Hier steht der Standardwert.
-// ─────────────────────────────────────────────────────────────────────────
+// ╔═══════════════════════════════════════════════════════════════════════╗
+// ║  🌐  GLOBALE ZUSATZ-ANWEISUNGEN  —  GELTEN FÜR ALLE 3 PERSONEN          ║
+// ║                                                                         ║
+// ║  Dieser Text wird bei JEDER Person zusätzlich mitgeschickt. Ideal, um   ║
+// ║  z.B. festzulegen, dass die Person ihren Charakter NICHT zu offen-      ║
+// ║  sichtlich verrät. Text steht zwischen den Backticks ` ... `.           ║
+// ║  (Lässt sich auch live im Admin-Bereich unter "Zusatz-Anweisungen"     ║
+// ║   ändern – dort aber nur vorübergehend.)                               ║
+// ╚═══════════════════════════════════════════════════════════════════════╝
 export const DEFAULT_GLOBAL_INSTRUCTIONS = `ZUSÄTZLICHE REGELN FÜR ALLE PERSONAS:
 - Verhalte dich wie ein echter Mensch im Arbeitsgespräch, nicht schematisch oder vorhersehbar.
 - Offenbare deine Charaktereigenschaften, Motive, Ängste und Anforderungen NICHT direkt oder von selbst. Sage niemals Dinge wie "ich bin ein Faktenmensch" oder "überzeuge mich mit Technik X".

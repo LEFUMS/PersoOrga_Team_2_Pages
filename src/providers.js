@@ -1,9 +1,19 @@
-// ─────────────────────────────────────────────────────────────────────────
-// LLM-PROVIDER ABSTRAKTION
-// Unterstützt mehrere Anbieter. Der API-Key wird NUR im Browser (localStorage)
-// gespeichert und direkt an den jeweiligen Anbieter geschickt — nie an einen
-// eigenen Server.
-// ─────────────────────────────────────────────────────────────────────────
+// ╔═══════════════════════════════════════════════════════════════════════╗
+// ║  🔑  KI-ANBIETER & API-KEYS                                            ║
+// ║                                                                         ║
+// ║  Diese Datei steuert die KI-Anbieter (Claude, OpenAI, Gemini, Mistral). ║
+// ║  Normalerweise müssen Sie hier NICHTS ändern.                           ║
+// ║                                                                         ║
+// ║  Wo wird der API-Key eingegeben?                                        ║
+// ║   • Standard: jede:r Nutzer:in gibt den Key beim ersten Öffnen im       ║
+// ║     Begrüßungsfenster ein (wird nur im Browser gespeichert).            ║
+// ║   • Fester Key für alle (nur bei Vercel): als Environment Variables     ║
+// ║     VITE_FIXED_PROVIDER, VITE_FIXED_API_KEY, VITE_FIXED_MODEL setzen.    ║
+// ║     Siehe Funktion getFixedConfig() weiter unten und die README.        ║
+// ║                                                                         ║
+// ║  Neue Modelle hinzufügen: in der jeweiligen "models"-Liste ergänzen.    ║
+// ╚═══════════════════════════════════════════════════════════════════════╝
+
 
 export const PROVIDERS = {
   anthropic: {
